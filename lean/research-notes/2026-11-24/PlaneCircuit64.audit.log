@@ -1,0 +1,4 @@
+'PEqualNPResearch.PlaneCircuit64.candidate_monotone' depends on axioms: [propext, Quot.sound]
+'PEqualNPResearch.PlaneCircuit64.candidate_size' does not depend on any axioms
+'PEqualNPResearch.PlaneCircuit64.one_positive' depends on axioms: [propext]
+'PEqualNPResearch.PlaneCircuit64.positive_pairs' depends on axioms: [propext, Classical.choice, Quot.sound]

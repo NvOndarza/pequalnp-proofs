@@ -1,0 +1,11 @@
+{
+  "gap": "L-meta-2625",
+  "cases": 676,
+  "unique_cases": 520,
+  "baseline_gates": 64,
+  "contractions_tested": 277806,
+  "seconds": 1.0951501610106789,
+  "candidate": null,
+  "scope": "sole-use child/parent contractions only, not arbitrary circuit exhaustion",
+  "program_sha256": "aa18be9b0e80bd279bae24fc59c6098404083e990112fe9bf40dd6dcb60423f2"
+}
