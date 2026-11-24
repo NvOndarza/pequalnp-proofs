@@ -8,6 +8,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ALLOWED={'propext','Classical.choice','Quot.sound'}
 THEOREMS={
+ 'Refute3316':['not_posted_statement'],
  'PetersenResidual':['petersen_false_vertex_four_restriction'],
  'Incidence':['incidence_count','common_line_unique','no_incidence_rectangle','line_intersection_at_most_one','rectangle_is_star','rectangle_edge_count_le_cost','rectangle_cover_cost'],
  'PlaneCircuit64':['candidate_monotone','candidate_size','one_positive','positive_pairs'],
@@ -48,4 +49,4 @@ for module,names in THEOREMS.items():
         assert {x.strip() for x in match.group(1).split(',')}<=ALLOWED,verdict
     results.append({'module':module,'theorems':len(names),'sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'exit_code':p.returncode,'elapsed_seconds':round(time.monotonic()-start,3),'axioms_allowed':True})
 (HERE/'verification.json').write_text(json.dumps({'lean':'4.36.0','mathlib':'fc4f59e577feb1a4956671bc04ac18aaaf8cd842','results':results},indent=2)+'\n')
-print('CHECKED:',sum(r['theorems'] for r in results),'auxiliary statements; no complete desk task proved.',flush=True)
+print('CHECKED:',sum(r['theorems'] for r in results),'named statements; this count does not establish an accepted desk submission.',flush=True)

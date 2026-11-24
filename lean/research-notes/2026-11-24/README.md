@@ -1,8 +1,18 @@
 # Checked auxiliary geometry and cover facts
 
-These are **research notes on a fork**, not an accepted P-vs-NP contribution and not a proof of any complete desk assignment. No upstream pull request is associated with this directory.
+These are **research results on a fork**, not accepted P-vs-NP contributions. They contain 24 auxiliary statements and one complete locally Lean-checked refutation of the overgeneralised desk statement L-meta-3316. That refutation is not a proof or disproof of P vs NP, nor of the fixed Heawood-graph circuit conjecture. No upstream PR for the refutation has been opened: no matching negated twin was found in the public desk snapshot, and the original live lease ended with HTTP 410.
 
 ## Contents
+
+### Complete local refutation: L-meta-3316
+
+`Refute3316.lean` proves the **exact negation of the original task statement**, included verbatim in the final theorem. `statement-3316.json` preserves the task text and its SHA256 without any lease token. The final theorem is audited in `Refute3316.audit.log`.
+
+The task quantifies over *every* predicate on fourteen Boolean inputs. Choose the predicate whose only satisfying assignments have masks **127, 244 and 432**. These three assignments are pairwise incomparable in the pointwise Boolean order, so all three are minimal satisfying assignments. Every permitted pair in the task starts with one of these three. The task requires the two selected wire values to differ at that first assignment; their AND is therefore false. But its minimal-input condition requires that same AND to be true. This contradiction is formalised without any extra axioms or native-backed decision tactic.
+
+The defect is the universal predicate quantifier in this child statement. **The original fixed-graph problem and the earlier Petersen circuit-size transfer remain open here.** A full local refutation is not the same as project acceptance. The project requires a posted negated twin for a counterexample submission; none was available in the checked desk snapshot. The positive L-meta-3316 target must not be silently replaced by its negation in an upstream PR.
+
+### Auxiliary results
 
 `PetersenResidual.lean` proves the exact function identity obtained by fixing input/vertex 4 to false in the nine-input Petersen-minus-one-vertex edge function and relabelling the remaining eight inputs. This was kernel-checked on all 256 residual inputs during the second follow-up hour. It links the task to the already published eight-input lower-bound certificate, but **does not prove the required circuit-size transfer or the new task's lower bound**.
 
@@ -37,17 +47,17 @@ The numerical cover-cost expression is **not** a lower bound on arbitrary circui
 
 ## Verification
 
-Checked using Lean **4.36.0** and the repository's Mathlib pin **fc4f59e577feb1a4956671bc04ac18aaaf8cd842**. All twenty-four statements are proved without `sorry`, extra axioms or native-backed decision tactics. The actual dependency audits contain only `propext`, `Classical.choice` and `Quot.sound`, or no axioms.
+Checked using Lean **4.36.0** and the repository's Mathlib pin **fc4f59e577feb1a4956671bc04ac18aaaf8cd842**. All twenty-five named statements (24 auxiliary results and the exact refutation) are proved without `sorry`, extra axioms or native-backed decision tactics. The actual dependency audits contain only `propext`, `Classical.choice` and `Quot.sound`, or no axioms.
 
 After installing the pinned Lean toolchain and fetching the Mathlib cache:
 
 ```sh
 cd lean
-lake build PEqualNP.Defs.MetaComplexityLgpMono
+lake build PEqualNP.Defs
 python3 research-notes/2026-11-24/verify.py
 python3 research-notes/2026-11-24/local_search.py
 ```
 
-The verifier compiles all six complete sources in temporary files, audits every named statement, rejects nonzero compiler exits and disallowed axiom dependencies, and records source SHA256s in `verification.json`. It terminates the exact compiler process group on timeout. The `.audit.log` files and `verification.json` are real execution output, not illustrative samples. The compiler path in the script reflects the existing local user installation and can be adapted to another installation.
+The verifier compiles all seven complete sources in temporary files, audits every named statement, rejects nonzero compiler exits and disallowed axiom dependencies, and records source SHA256s in `verification.json`. It terminates the exact compiler process group on timeout. The `.audit.log` files and `verification.json` are real execution output, not illustrative samples. The compiler path in the script reflects the existing local user installation and can be adapted to another installation.
 
 These statements originated during the bounded overnight experiment of 24 November 2026 and were repackaged under descriptive namespaces and rechecked during the authorised follow-up hour. The prior native-backed Petersen diagnostic was deliberately excluded.
