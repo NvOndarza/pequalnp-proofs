@@ -4,6 +4,8 @@ These are **research notes on a fork**, not an accepted P-vs-NP contribution and
 
 ## Contents
 
+`Incidence.lean` adds seven general geometry and counting lemmas, valid for arbitrary finite incidence structures satisfying their explicit hypotheses. In particular, an all-incidence rectangle must be a star (one side has at most one vertex), and any rectangle cover has total endpoint cost at least `N*k` when every line has `k` incident points. This establishes a genuine combinatorial half of a possible circuit-bound argument. **Extracting such a cover with a suitable cost bound from an arbitrary circuit remains unproved.** No circuit lower bound follows here without that bridge.
+
 `PlaneCircuit64.lean` defines the explicit 64-gate monotone baseline for L-meta-2625. Four checked statements establish its permitted gate basis, its size, one concrete positive input and **all 52 incident-pair inputs**. These facts do not meet the task's 63-gate bound. The full negative-boundary proof was not completed within the verification time limit and is not included as a Lean theorem.
 
 `local_search.py` independently checks this same baseline against all 676 listed tests (520 distinct inputs), including the 624 generated negative tests. It also checks 277,806 sole-use child/parent contractions without finding a 63-gate candidate. This is **only a local neighbourhood**, not an exhaustive circuit search, a nonexistence proof or a Lean-checked negative-boundary certificate. Actual output and the program SHA256 are in `local-search-result.json`.
@@ -33,7 +35,7 @@ The numerical cover-cost expression is **not** a lower bound on arbitrary circui
 
 ## Verification
 
-Checked using Lean **4.36.0** and the repository's Mathlib pin **fc4f59e577feb1a4956671bc04ac18aaaf8cd842**. All sixteen statements are proved without `sorry`, extra axioms or native-backed decision tactics. The actual dependency audits contain only `propext`, `Classical.choice` and `Quot.sound`, or no axioms.
+Checked using Lean **4.36.0** and the repository's Mathlib pin **fc4f59e577feb1a4956671bc04ac18aaaf8cd842**. All twenty-three statements are proved without `sorry`, extra axioms or native-backed decision tactics. The actual dependency audits contain only `propext`, `Classical.choice` and `Quot.sound`, or no axioms.
 
 After installing the pinned Lean toolchain and fetching the Mathlib cache:
 
@@ -44,6 +46,6 @@ python3 research-notes/2026-11-24/verify.py
 python3 research-notes/2026-11-24/local_search.py
 ```
 
-The verifier compiles all four complete sources in temporary files, audits every named statement, rejects nonzero compiler exits and disallowed axiom dependencies, and records source SHA256s in `verification.json`. It terminates the exact compiler process group on timeout. The `.audit.log` files and `verification.json` are real execution output, not illustrative samples. The compiler path in the script reflects the existing local user installation and can be adapted to another installation.
+The verifier compiles all five complete sources in temporary files, audits every named statement, rejects nonzero compiler exits and disallowed axiom dependencies, and records source SHA256s in `verification.json`. It terminates the exact compiler process group on timeout. The `.audit.log` files and `verification.json` are real execution output, not illustrative samples. The compiler path in the script reflects the existing local user installation and can be adapted to another installation.
 
 These statements originated during the bounded overnight experiment of 24 November 2026 and were repackaged under descriptive namespaces and rechecked during the authorised follow-up hour. The prior native-backed Petersen diagnostic was deliberately excluded.

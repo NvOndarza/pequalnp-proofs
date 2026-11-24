@@ -8,6 +8,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ALLOWED={'propext','Classical.choice','Quot.sound'}
 THEOREMS={
+ 'Incidence':['incidence_count','common_line_unique','no_incidence_rectangle','line_intersection_at_most_one','rectangle_is_star','rectangle_edge_count_le_cost','rectangle_cover_cost'],
  'PlaneCircuit64':['candidate_monotone','candidate_size','one_positive','positive_pairs'],
  'Matching':['matching_cover_lower_bound','diagonal_cover_lower_bound'],
  'Plane13':['line_card','distinct_intersection','complement_admissible'],
