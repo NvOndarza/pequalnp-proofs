@@ -1,0 +1,7 @@
+'PEqualNPResearch.Plane21.diagonal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PEqualNPResearch.Plane21.cover_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PEqualNPResearch.Plane21.edge_count' does not depend on any axioms
+'PEqualNPResearch.Plane21.cover_cost' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PEqualNPResearch.Plane21.pair_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PEqualNPResearch.Plane21.left_endpoints' does not depend on any axioms
+'PEqualNPResearch.Plane21.left_cover_exact' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,3 @@
+'PEqualNPResearch.Plane13.line_card' depends on axioms: [propext, Quot.sound]
+'PEqualNPResearch.Plane13.distinct_intersection' depends on axioms: [propext, Quot.sound]
+'PEqualNPResearch.Plane13.complement_admissible' depends on axioms: [propext, Classical.choice, Quot.sound]
