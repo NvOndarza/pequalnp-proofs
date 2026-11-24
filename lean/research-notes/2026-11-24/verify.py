@@ -8,6 +8,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ALLOWED={'propext','Classical.choice','Quot.sound'}
 THEOREMS={
+ 'PetersenResidual':['petersen_false_vertex_four_restriction'],
  'Incidence':['incidence_count','common_line_unique','no_incidence_rectangle','line_intersection_at_most_one','rectangle_is_star','rectangle_edge_count_le_cost','rectangle_cover_cost'],
  'PlaneCircuit64':['candidate_monotone','candidate_size','one_positive','positive_pairs'],
  'Matching':['matching_cover_lower_bound','diagonal_cover_lower_bound'],
@@ -35,13 +36,16 @@ for module,names in THEOREMS.items():
     (HERE/(module+'.audit.log')).write_text(out)
     print(out,flush=True)
     assert p.returncode==0,(module,p.returncode)
-    assert len(out.splitlines())==len(names),out
-    for name in names:
-        line=next(l for l in out.splitlines() if "'PEqualNPResearch."+module+'.'+name+"'" in l)
-        if 'does not depend on any axioms' in line: continue
-        match=re.search(r'depends on axioms: \[([^]]*)\]',line)
-        assert match,line
-        assert set(x.strip() for x in match.group(1).split(','))<=ALLOWED,line
+    blocks=re.findall(r"'(PEqualNPResearch\.[^']+)'\s+(does not depend on any axioms|depends on axioms:\s*\[[^\]]*\])",out,re.S)
+    audited=dict(blocks)
+    expected={'PEqualNPResearch.'+module+'.'+n for n in names}
+    assert len(blocks)==len(names) and set(audited)==expected,out
+    for name in expected:
+        verdict=audited[name]
+        if verdict=='does not depend on any axioms': continue
+        match=re.search(r'depends on axioms:\s*\[([^]]*)\]',verdict,re.S)
+        assert match,verdict
+        assert {x.strip() for x in match.group(1).split(',')}<=ALLOWED,verdict
     results.append({'module':module,'theorems':len(names),'sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'exit_code':p.returncode,'elapsed_seconds':round(time.monotonic()-start,3),'axioms_allowed':True})
 (HERE/'verification.json').write_text(json.dumps({'lean':'4.36.0','mathlib':'fc4f59e577feb1a4956671bc04ac18aaaf8cd842','results':results},indent=2)+'\n')
 print('CHECKED:',sum(r['theorems'] for r in results),'auxiliary statements; no complete desk task proved.',flush=True)

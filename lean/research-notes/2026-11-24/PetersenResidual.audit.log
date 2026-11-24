@@ -1,0 +1,3 @@
+'PEqualNPResearch.PetersenResidual.petersen_false_vertex_four_restriction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
