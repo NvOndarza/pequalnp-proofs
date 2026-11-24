@@ -4,6 +4,11 @@ These are **research notes on a fork**, not an accepted P-vs-NP contribution and
 
 ## Contents
 
+`Matching.lean` adds two reusable results proved during the follow-up hour, rather than by finite enumeration:
+
+- any set meeting every edge of a finite vertex-disjoint matching has at least as many elements as that matching;
+- the specialisation to `n` disjoint pairs in two consecutive natural-number blocks.
+
 `Plane13.lean` checks three finite facts for the cyclic projective plane of order 3, with lines `t + {0,1,3,9}` in `Fin 13`:
 
 - every line has four points;
@@ -24,7 +29,7 @@ The numerical cover-cost expression is **not** a lower bound on arbitrary circui
 
 ## Verification
 
-Checked using Lean **4.36.0** and the repository's Mathlib pin **fc4f59e577feb1a4956671bc04ac18aaaf8cd842**. All ten statements are proved without `sorry`, extra axioms or native-backed decision tactics. The actual dependency audits contain only `propext`, `Classical.choice` and `Quot.sound`, or no axioms.
+Checked using Lean **4.36.0** and the repository's Mathlib pin **fc4f59e577feb1a4956671bc04ac18aaaf8cd842**. All twelve statements are proved without `sorry`, extra axioms or native-backed decision tactics. The actual dependency audits contain only `propext`, `Classical.choice` and `Quot.sound`, or no axioms.
 
 After installing the pinned Lean toolchain and fetching the Mathlib cache:
 
@@ -33,6 +38,6 @@ cd lean
 python3 research-notes/2026-11-24/verify.py
 ```
 
-The script compiles both complete sources in temporary files, audits every named statement, rejects nonzero compiler exits and disallowed axiom dependencies, and records source SHA256s in `verification.json`. It terminates the exact compiler process group on timeout. The `.audit.log` files and `verification.json` are real execution output, not illustrative samples. The compiler path in the script reflects the existing local user installation and can be adapted to another installation.
+The script compiles all three complete sources in temporary files, audits every named statement, rejects nonzero compiler exits and disallowed axiom dependencies, and records source SHA256s in `verification.json`. It terminates the exact compiler process group on timeout. The `.audit.log` files and `verification.json` are real execution output, not illustrative samples. The compiler path in the script reflects the existing local user installation and can be adapted to another installation.
 
 These statements originated during the bounded overnight experiment of 24 November 2026 and were repackaged under descriptive namespaces and rechecked during the authorised follow-up hour. The prior native-backed Petersen diagnostic was deliberately excluded.

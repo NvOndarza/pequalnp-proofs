@@ -1,0 +1,2 @@
+'PEqualNPResearch.Matching.matching_cover_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PEqualNPResearch.Matching.diagonal_cover_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
